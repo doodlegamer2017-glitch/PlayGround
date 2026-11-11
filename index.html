@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#101513" />
+  <title>FULL COURT — Pro Basketball</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app" id="app">
+    <canvas id="court" aria-label="Interactive basketball game court"></canvas>
+    <div class="grain"></div>
+    <header class="topbar">
+      <button class="brand" id="homeButton" aria-label="Full Court home"><span class="brand-mark">F<span>C</span></span><span class="brand-name">FULL<span>COURT</span></span></button>
+      <nav class="main-nav"><button class="nav-link active" data-view="play">PLAY</button><button class="nav-link" data-view="roster">ROSTER</button><button class="nav-link" data-view="controls">HOW TO PLAY</button></nav>
+      <div class="top-right"><span class="season-tag"><i></i> PRO RUN · SEASON 26</span><button class="sound-button" id="soundButton" aria-label="Toggle sound">♫ <span>SOUND ON</span></button></div>
+    </header>
+
+    <section class="home-view view active" id="homeView">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-line"></span> THE GAME IS YOURS</p>
+        <h1>OWN THE<br><em>COURT.</em></h1>
+        <p class="hero-description">The lights are up. The crowd is waiting.<br>Make every possession count.</p>
+        <button class="primary-button" id="playButton"><span>TIP OFF</span><b>↗</b></button>
+        <div class="quick-note"><span class="live-dot"></span> QUICK PLAY <span class="note-divider">/</span> 3v3 · FIRST TO 21</div>
+      </div>
+      <div class="hero-side">
+        <div class="edition-tag">2025 — 26 <span>PRO RUN</span></div>
+        <div class="matchup-panel">
+          <div class="panel-top"><span>TONIGHT’S MATCHUP</span><span class="panel-live"><i></i> READY</span></div>
+          <div class="team-pick home-pick"><div class="team-emblem home-emblem" id="homeEmblem">NY</div><div class="team-info"><small>HOME</small><strong id="homeTeamName">NEW YORK</strong><span id="homeTeamSub">KNICKS</span></div><button class="select-team" id="homeTeamSelect" aria-label="Choose home team">⌄</button></div>
+          <div class="versus-row"><span></span><b>VS</b><span></span></div>
+          <div class="team-pick away-pick"><div class="team-emblem away-emblem" id="awayEmblem">GS</div><div class="team-info"><small>AWAY</small><strong id="awayTeamName">GOLDEN STATE</strong><span id="awayTeamSub">WARRIORS</span></div><button class="select-team" id="awayTeamSelect" aria-label="Choose away team">⌄</button></div>
+          <button class="match-play" id="matchPlay"><span>PLAY THIS MATCHUP</span><b>→</b></button>
+        </div>
+        <div class="featured-player"><div class="feature-number">01</div><div><small>PLAYER TO WATCH</small><strong id="featuredName">Jalen Brunson</strong><span id="featuredMeta">PG · NEW YORK KNICKS</span></div><span class="feature-arrow">↗</span></div>
+      </div>
+      <div class="hero-footer"><span>BUILT FOR THE BIG MOMENT</span><span class="footer-center">A COURTSIDE EXPERIENCE</span><span>SCROLL TO EXPLORE <b>↓</b></span></div>
+    </section>
+
+    <section class="game-view view" id="gameView">
+      <div class="game-topline"><button class="back-button" id="exitGame">← <span>EXIT GAME</span></button><span class="game-mode">PRO RUN <i>•</i> 3 ON 3</span><button class="pause-button" id="pauseButton">Ⅱ <span>PAUSE</span></button></div>
+      <div class="scoreboard"><div class="score-team score-home"><span class="score-icon" id="gameHomeIcon">NY</span><div><small id="gameHomeName">NEW YORK</small><b id="homeScore">00</b></div></div><div class="score-middle"><small id="periodLabel">1ST QUARTER</small><strong id="gameClock">2:00</strong><span>SHOT <b id="shotClock">14</b></span></div><div class="score-team score-away"><div><small id="gameAwayName">GOLDEN STATE</small><b id="awayScore">00</b></div><span class="score-icon away-icon" id="gameAwayIcon">GS</span></div></div>
+      <div class="game-hint" id="gameHint">YOUR POSSESSION <span>·</span> ATTACK THE RIM</div>
+      <div class="shot-meter" id="shotMeter"><div class="meter-label">RELEASE AT THE TOP</div><div class="meter-track"><i id="meterFill"></i><b></b></div><div class="meter-label" id="meterFeedback">TIMING</div></div>
+      <div class="game-controls"><div class="control-help"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><span>MOVE</span><i></i><kbd>SPACE</kbd><span>SHOOT / STEAL</span><i></i><kbd>SHIFT</kbd><span>SPRINT</span></div><div class="mobile-actions"><button id="mobileShoot">SHOOT</button><button id="mobileSprint">SPRINT</button></div></div>
+      <div class="game-toast" id="gameToast"></div>
+      <div class="pause-overlay" id="pauseOverlay"><div class="pause-card"><small>TIMEOUT</small><h2>TAKE A BREATHER.</h2><p>Reset your focus. The court will be waiting.</p><button class="primary-button" id="resumeButton"><span>BACK TO GAME</span><b>→</b></button><button class="text-button" id="pauseExit">END GAME</button></div></div>
+      <div class="game-end" id="gameEnd"><div class="pause-card"><small>FINAL SCORE</small><h2 id="finalTitle">WHAT A GAME.</h2><p id="finalSummary"></p><button class="primary-button" id="rematchButton"><span>RUN IT BACK</span><b>→</b></button><button class="text-button" id="endHome">BACK TO MENU</button></div></div>
+    </section>
+
+    <section class="roster-view view" id="rosterView">
+      <div class="subpage-heading"><p class="eyebrow"><span class="eyebrow-line"></span> KNOW YOUR SQUAD</p><h2>THE <em>ROSTER.</em></h2><p>Pick a franchise and meet the players taking the floor.</p></div>
+      <div class="roster-browser"><div class="roster-team-list" id="rosterTeams"></div><div class="roster-detail" id="rosterDetail"></div></div>
+    </section>
+
+    <section class="controls-view view" id="controlsView">
+      <div class="subpage-heading"><p class="eyebrow"><span class="eyebrow-line"></span> FIND YOUR RHYTHM</p><h2>PLAY <em>YOUR WAY.</em></h2><p>Simple controls. Big moments. It’s all about timing.</p></div>
+      <div class="instruction-grid"><article class="instruction-card"><div class="instruction-icon">⌖</div><small>01 / GET IN POSITION</small><h3>MOVE WITH PURPOSE</h3><p>Use <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> to move your player around the half court. Create space, find the lane, and get open.</p></article><article class="instruction-card"><div class="instruction-icon">◉</div><small>02 / TAKE YOUR SHOT</small><h3>FIND THE RELEASE</h3><p>Hold <kbd>SPACE</kbd> to gather, then release when the meter reaches the sweet spot. Closer shots are easier to make.</p></article><article class="instruction-card"><div class="instruction-icon">↗</div><small>03 / TURN UP THE HEAT</small><h3>ATTACK THE RIM</h3><p>Hold <kbd>SHIFT</kbd> while moving to sprint. Get to the paint for a high-percentage finish—or pull up from deep.</p></article><article class="instruction-card"><div class="instruction-icon">⛨</div><small>04 / LOCK IN ON D</small><h3>MAKE A STOP</h3><p>On defense, press <kbd>SPACE</kbd> near the ball handler to contest or steal. Stay between your opponent and the basket.</p></article></div>
+      <button class="primary-button controls-play" id="controlsPlay"><span>LET’S PLAY</span><b>→</b></button>
+    </section>
+
+    <div class="team-modal" id="teamModal" aria-hidden="true"><div class="modal-card"><div class="modal-heading"><div><small>FRANCHISE SELECT</small><h3>CHOOSE YOUR <em>TEAM.</em></h3></div><button id="closeModal" aria-label="Close">×</button></div><div class="team-grid" id="teamGrid"></div></div></div>
+  </main>
+  <script src="rosters.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
